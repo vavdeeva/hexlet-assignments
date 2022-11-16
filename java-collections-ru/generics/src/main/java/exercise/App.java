@@ -7,16 +7,19 @@ import java.util.Map.Entry;
 
 // BEGIN
 class App {
-	    public static List<Map> findWhere(List<Map> books, Map<String, String> where) {
-		            List<Map> result = new ArrayList<>();
+
+	    public static List<Map<String, String>> findWhere(List<Map<String, String>> books, Map<String, String> where) {
+
+		            List<Map<String, String>> result = new ArrayList<>();
+
 			            Integer sizeWhere = where.size();
 
-				            for (Map book: books) {
+				            for (Map<String, String> book: books) {
 						                Integer count = 0;
 								            for (Map.Entry<String, String> w: where.entrySet()) {
-										                    Object valueW = w.getValue();
-												                    Object keyW = w.getKey();
-														                    Object valueB = book.get(keyW);
+										                    String valueW = w.getValue();
+												                    String keyW = w.getKey();
+														                    String valueB = book.get(keyW);
 
 																                    if (valueW.equals(valueB)) {
 																			                        count++;

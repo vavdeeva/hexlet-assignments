@@ -7,11 +7,8 @@ import java.util.Map.Entry;
 
 // BEGIN
 class App {
-
 	    public static List<Map> findWhere(List<Map> books, Map<String, String> where) {
-
 		            List<Map> result = new ArrayList<>();
-
 			            Integer sizeWhere = where.size();
 
 				            for (Map book: books) {
@@ -31,6 +28,5 @@ class App {
 											        }
 					            return result;
 						        }
-
 }
 //END

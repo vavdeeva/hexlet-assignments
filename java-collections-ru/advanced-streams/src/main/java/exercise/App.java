@@ -5,31 +5,17 @@ import java.util.Arrays;
 
 // BEGIN
 class App {
-
-	    public static String getForwardedVariables(String content) {
-		            String[] split = content.split("\n");
-
-			            String result = "";
-
-				            for (String s: split) {
-						                System.out.println(s);
-								            if (s.startsWith("environment")) {
-										                    String replace = s.replace("environment=", "").replace("\"", "");
-												                    String [] split2 = replace.split(",");
-														                    for (String s2: split2) {
-																	                        if (s2.startsWith("X_FORWARDED_")) {
-																					                        if (!result.equals("")) {
-																									                            result = result + ",";
-																												                            }
-																								                        result = result + s2.replace("X_FORWARDED_", "");
-																											                    }
-
-																				                }
-																                }
-									            }
-
-					            return result;
-						        }
-
+	    public static String getForwardedVariables(String config) {
+		            String[] lines = config.split("\n");
+			            return Arrays.stream(lines)
+					                    .filter(line -> line.startsWith("environment="))
+							                    .map(line -> line.replaceAll("environment=", ""))
+									                    .map(line -> line.replaceAll("\"", ""))
+											                    .map(line -> line.split(","))
+													                    .flatMap(Arrays::stream)
+															                    .filter(kv -> kv.startsWith("X_FORWARDED_"))
+																	                    .map(kv -> kv.replaceFirst("X_FORWARDED_", ""))
+																			                    .collect(Collectors.joining(","));
+				        }
 }
 //END

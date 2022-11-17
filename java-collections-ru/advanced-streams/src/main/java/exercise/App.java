@@ -7,7 +7,7 @@ import java.util.Arrays;
 class App {
 
 	    public static String getForwardedVariables(String content) {
-		            String[] split = content.split("\r\n");
+		            String[] split = content.split("\n");
 
 			            String result = "";
 
